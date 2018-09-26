@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Truss Solver</title>
+  <!-- Scripts -->
+  <script src="lib/jquery-1.6.2.min.js" type="text/javascript"></script>
+  <script src="lib/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="lib/dark-hive/jquery-ui-1.8.16.custom.css" />
+  <script src="lib/raphael.js" type="text/javascript"></script>
+  <script src="lib/raphael.blur.js" type="text/javascript"></script>
+  <script src="lib/sylvester.js" type="text/javascript"></script>
+  <script src="lib/underscore.js" type="text/javascript"></script>
+  <script src="lib/json2.js" type="text/javascript"></script>
+  <script src="lib/jquery.ba-hashchange.min.js" type="text/javascript"></script>
+  <script src="lib/webtoolkit.base64.js" type="text/javascript"></script>
+  <script src="lib/lzw.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Scripts end -->
+  <!-- Style Sheet -->
+  <style>
+    html {
+      background: #1E1D6F;
+      color: #f0f0f0;
+      font-family: Times New Roman, sans-serif;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    a {
+      color: lightgrey;
+    }
+
+    a:active,
+    a:hover {
+      color: #fff;
+    }
+
+    button.active {
+      background: green;
+    }
+
+    input#blob {
+      width: 300px;
+    }
+
+    #controls {
+      float: right;
+      font-size: 10px;
+    }
+
+    #partition2 table {
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    #partition1,
+    #partition2 {
+      background: #B8B4B4;
+      padding: 1px;
+      margin: 1px;
+      overflow-x: auto;
+      overflow-y: visible;
+      font-size: 20px;
+    }
+
+    #container {
+      margin: 10px;
+      width: auto;
+    }
+
+    .clearfix {
+      overflow: hidden;
+    }
+
+    #tips,
+    #examples {
+      float: left;
+    }
+
+    #tips {
+      width: 600px;
+    }
+
+    #examples {
+      width: 360px;
+    }
+
+    .custom-btn {
+      width: 250px;
+      margin-bottom: 20px;
+      background: #A5A5A8;
+      height: 40px;
+    }
+  </style>
+  <!-- Style Sheet end -->
+</head>
+
+<body>
+  <div class="container" id="container">
+    <div class="row">
+      <div class="col-md-12" style="text-align: center; font-size: 50px; padding: 15px; font-weight: bold; font-family: initial;">
+        <span>Truss Solver</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4" id="controls">
+        <div class="ui-widget-header ui-corner-all" style="background:#1E1D6F; border: 0px">
+          <div>
+            <button id="add-node-btn" class="custom-btn">Add Node</button>
+          </div>
+          <div>
+            <button id="add-member-btn" class="custom-btn">Add Member</button>
+          </div>
+          <div>
+            <button id="add-support-btn" class="custom-btn">Add Fixed Support</button>
+          </div>
+          <div>
+            <button id="add-load-btn" class="custom-btn">Add Load</button>
+          </div>
+          <div>
+            <button id="clear-btn" class="custom-btn">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8" id="canvas"></div>
+    </div>
+  </div>
+
+  <div id="partition1"></div>
+  <div id="partition2"></div>
+
+  <div class="row" style="margin-top:20px">
+    <div class="col-xs-12" style="text-align: center; font-size: 15pt;">
+      <a href="about.html" style="text-decoration: none">About Us</a>
+    </div>
+  </div>
+
+  <script>
+    var w = 960;
+    var h = 600;
+    var gridspace = 30;
+
+    function showElems() {
+      $('#partition1').html(_.size(members) + " members, " + _.size(nodes) + " nodes, " + _.size(supports) + " supports, " + _.size(loads) + " loads");
+    }
+    setInterval(showElems, 100);
+  </script>
+  <script type="text/javascript" src="js/compute.js"></script>
+</body>
+
+</html>
